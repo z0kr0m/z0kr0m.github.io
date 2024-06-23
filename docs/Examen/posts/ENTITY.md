@@ -7,7 +7,7 @@ title: "Entity Framework"
  
  
  
-## INSTALAR PAQUETES NUGGET
+## Instalar paquetes Nugget
  
 
  Primero de todo antes de comenzar, instalamos los siguientes [paquetes Nugget](../Recordatorios.md):
@@ -16,18 +16,46 @@ title: "Entity Framework"
 - Microsoft.EntityFrameworkCore.Design
 - Microsoft.EntityFrameworkCore.SqlServer
 - Microsoft.EntityFrameworkCore.Tools
+----- 
 
+## Cadena de conexión
 
-
-  
+<div> A continuación, tenemos que declarar la cadena de conexión de nuestra base de datos. </div>
+Nos dirigimos al archivo  `App.Settings` en la raiz de nuestro proyecto.
  
- 
-App.Settings
- 
+ > Agregamos la siguiente cadena:
+```json
 "ConnectionStrings": {
-  "MiConexion": "Data Source=TU-MAMA-ES-LESB;Initial Catalog=Tienda5;User ID=sa;Password=1234;TrustServerCertificate=True;Encrypt=True;Trusted_Connection=True;MultipleActiveResultSets=true"
+  "MiConexion": "Data Source=DesktopMJK2;Initial Catalog=Tienda5;User ID=sa;Password=1234;TrustServerCertificate=True;Encrypt=True;Trusted_Connection=True;MultipleActiveResultSets=true"
 }
- 
+```
+
+<br>
+Ten cuidado al copiar la cadena, no te olvides de la coma después del AllowedHost
+!!! warning
+    
+    ![Nuggets](../../images/lacoma.PNG)
+
+### Explicación cadena de conexión
+
+!!! info
+    Esta cadena es para SQL server, si pide MySql es diferente, pulsa aquí
+
+- Data Source -> Nombre de nuestra instancia del servidor de base de datos
+- Initial Catalog -> El nombre de la base de datos que queramos gestionar
+- User -> Tu usuario, si lo tienes por defecto es `sa`
+- Password -> La contraseña del usuario, si lo tienes por defecto es `sa` (Si no funciona prueba con 1234)
+
+------
+
+## Crear modelo de datos
+
+
+
+
+
+
+
  
 	
  

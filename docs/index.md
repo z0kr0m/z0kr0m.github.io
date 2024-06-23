@@ -1,6 +1,6 @@
 # Welcome to my blog
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+ - Entity Framework >> [Aquí](/Examen/2024/06/23/entity-framework/).
 
 ## Commands
 
