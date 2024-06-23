@@ -26,6 +26,8 @@ markdown_extensions:
 theme:
   name: material
   lang: en
+  favicon: images/favicon.png
+  logo: images/favicon.png
   features:
     - header.autohide
     - navigation.tabs

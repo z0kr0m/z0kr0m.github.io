@@ -39,7 +39,7 @@ Ten cuidado al copiar la cadena, no te olvides de la coma después del AllowedHo
 ### Explicación cadena de conexión
 
 !!! info
-    Esta cadena es para SQL server, si pide MySql es diferente, pulsa aquí
+    Esta cadena es para SQL server, si pide MySql es diferente, pulsa [aquí](/Examen/Recordatorios/#conexion-mysql)
 
 - Data Source -> Nombre de nuestra instancia del servidor de base de datos
 - Initial Catalog -> El nombre de la base de datos que queramos gestionar
