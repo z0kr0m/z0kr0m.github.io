@@ -84,6 +84,11 @@ Cada propiedad con public y su respectivo tipo de dato (Recuerda: Si en la base 
 
 - `[ForeignKey(nameof(CategoriaId))]` Identifica a una foreign key, primero creamos un campo, en este caso de tipo int, después, creamos un objeto del modelo que estamos haciendo referencia.
 
+!!! warning
+    SI USAMOS DECIMAL CUIDADOOOOO PORQUE SI NOS PASAMOS DEL RANGO NOS VA A SALTAR UN ERROR, en este ejemplo tenemos 4 decimales, si al insertar introducimos 1000000 nos va a salir error. Por otro lado, si al introducir un ID de la foreign key no existe ese valor en la base de datos, nos saltará un error.
+
+Como recomendación recomiendo primero hacer un `INSERT INTO` en todas las tablas de la base de datos para tener valores con los que jugar cuando hagamos las queries.
+
 ```csharp
 // Primero la propiedad para almacenar la foreign key
  public int CategoriaId { get; set; }
@@ -254,9 +259,16 @@ Nos va a aparecer un formulario en HTML con todos los campos del modelo.
 
 ![formulario](../../images/formulario.png)
 
-Lo único que tenemos que agregar / modificar es `method="post"`, `asp-controller="NombreControlador"`, `asp-action="NombreMetodo"`
-El controlador es el mismo desde donde hemos hecho el clic derecho para agregar la vista, el método es el encargado de manejar los datos que el cliente va a rellenar en el formulario. Asignamos el nombre que queramos al action y volvemos al controlador donde vamos a crearlo.
+Tenemos que agregar / modificar es `method="post"`, `asp-controller="NombreControlador"`, `asp-action="NombreMetodo"`
+El controlador es el mismo desde donde hemos hecho el clic derecho para agregar la vista, el método es el encargado de manejar los datos que el cliente va a rellenar en el formulario. Asignamos el nombre que queramos al action ahora lo crearemos.
 
+Además, tenemos que cambiar el select y agregar un input de texto para nosotros agregar manualmente el id (más fácil, sino tendríamos que agregar una lista de categorias).
+
+![newFormulario](../../images/newFormulario.png)
+
+Así es como quedaría, simplemente tenemos que cambiar el select por un input.
+
+Volvemos al controlador y agreamos otro método debajo del que acabamos de crear.
 
 ```csharp
 
@@ -278,6 +290,208 @@ Entre paréntesis va a ir el Modelo que hemos elegido antes al crear la vista de
 
 En cuanto a `_contexto` es el nombre que le hemos asignado arriba al crear el controlador [aquí](/Examen/2024/06/23/entity-framework/#crear-un-controlador) 
 `misProductos` hace referencia al DbSet que hemos creado tambíen [arriba](/Examen/2024/06/23/entity-framework/#crear-clase-dbcontext), en este caso es productos, porque estamos usando el modelo productos.
+
+
+Para probarlo, podríamos directamente ejecutar el programa (triangulo verde con fondo oscuro), y modificar la url
+
+![urla](../../images/url.png)
+
+Pero el cliente no se sabe el nombre del controlador ni de los métodos, por lo tanto tenemos que modificar el Index, que es la página de inicio que nos carga al ejecutar el programa.
+
+![homeinde](../../images/homeIndex.png)
+
+Dentro, agregamos lo siguiente:
+
+```csharp
+<a asp-controller="Producto" asp-action="vistaCrear">Agregar Producto</a>
+```
+Modificando `"Producto"` por el nombre del controlador y `"vistaCrear"` por el método necesario, Agregar Producto va a ser lo que el cliente va a visualizar, así no tiene que escribrir nada en la URL.
+
+!!! note
+    Por cada método que hagamos tendremos que agregar un enlace para que el usuario pueda hacer clic (solo los que NO tienen HttPost, acuerdate que estos sirven para manejar las respuestas en el servidor no en el cliente).
+
+Ahora ya puedes probar a insertar un dato, te copio un pequeño recuerdo de antes:
+> SI USAMOS DECIMAL CUIDADOOOOO PORQUE SI NOS PASAMOS DEL RANGO NOS VA A SALTAR UN ERROR, en este ejemplo tenemos 4 decimales, si al insertar introducimos 1000000 nos va a salir error. Por otro lado, si al introducir un ID de la foreign key no existe ese valor en la base de datos, nos saltará un error.
+Como recomendación recomiendo primero hacer un `INSERT INTO` en todas las tablas de la base de datos para tener valores con los que jugar cuando hagamos las queries.
+
+### Listar
+
+Vamos a hacer un listado, para ello volvemos al controlador y creamos otro método.
+
+```csharp
+   public IActionResult Listar()
+   {
+       var productos = _contexto.misProductos.ToList();
+       return View(productos);
+   }
+```
+Lo mismo de antes, revisa que modelo quieres listar y reemplaza `misProductos` por el nombre que le hayas asignado en el DbSet [recuerdo](/Examen/2024/06/23/entity-framework/#crear-clase-dbcontext). `productos` es el nombre que tú le pongas, da lo mismo, pero no te olvides de ponerlo también en el return.
+
+Agregamos en el index del Home la url, como hemos hecho arriba y ya podremos listar.
+
+![listar](../../images/Listar.PNG)
+
+### Actualizar
+
+Es el turno de actualizar (este es más complejo), volvemos a nuestro controlador y agregamos los siguientes métodos:
+
+```csharp
+
+   public IActionResult EditarProducto()
+   {
+       return View(new (EditarProductoModelo));
+   }
+
+   [HttpPost]
+   public IActionResult EditarProducto(EditarProductoModelo model)
+   {
+       return RedirectToAction(nameof(Editar), new { id = model.Id });
+   }
+
+
+   public IActionResult Editar(int id)
+   {
+       var producto = _contexto.misProductos.Find(id);
+       if (producto == null)
+       {
+           return NotFound();
+       }
+       return View(producto);
+   }
+
+   [HttpPost]
+   public IActionResult Editar(Producto producto)
+   {
+       if (ModelState.IsValid)
+       {
+           _contexto.misProductos.Update(producto);
+           _contexto.SaveChanges();
+           return RedirectToAction(nameof(Index));
+       }
+       return View(producto);
+   }
+
+```
+
+Tenemos que crear un nuevo modelo en la carpeta Models con el nombre que pongamos, en este caso es `EditarProductoModelo`
+Este modelo simplemente va a contener un ID
+
+
+```csharp
+ public class EditarProductoModelo
+ {
+     public int Id { get; set; }
+ }
+```
+
+Ahora tenemos que crear la vista, en este caso la hemos llamado `EditarProducto`, (ve revisando el código de arriba y ajustando nombres).
+En este caso, no uses plantillas, creala vacía y manual, y copia el siguiente código:
+
+```csharp
+@model  WebApplication9.Models.EditarProductoModelo
+
+<form asp-action="EditarProducto">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="Id" class="control-label">ID del producto</label>
+        <input asp-for="Id" class="form-control" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Editar" class="btn btn-default" />
+    </div>
+</form>
+```
+En la primera línea hay que modificar `EditarProductoModelo` por el nombre del modelo que hayas creado.
+
+Volvemos al controlador y hacemos clic derecho sobre Editar y creamos una plantilla de editar.
+
+![actualizar](../../images/acrtualizar.PNG){: style="height:400px;width:600px"}
+
+Aquí no tenemos que modificar nada porque hemos llamado con el mismo nombre al método.
+Ahora vuelve a agregar en la vista del Index de home un enlace hacia este método. (Tienes que escribir el primero de todos, en este caso ` EditarProducto`).
+
+![ediatr](../../images/editar.PNG)
+
+Aquí insertamos el id del producto a editar
+
+![editar2](../../images/editar2.PNG)
+
+Aquí lo editamos (Puedes editar la vista y quitar el select por un input como hemos hecho antes, para hacerlo manual).
+
+### Borrar
+Y por último, borrar, es lo mismo que editar, pero borrando, vamos a reciclar el mismo modelo que solo tenía un id.
+
+```csharp
+ public IActionResult BorrarProducto()
+ {
+     return View(new EditarProductoModelo());
+ }
+
+ [HttpPost]
+ public IActionResult BorrarProducto(EditarProductoModelo model)
+ {
+     return RedirectToAction(nameof(Borrar), new { id = model.Id });
+ }
+
+ public IActionResult Borrar(int id)
+ {
+     var producto = _contexto.misProductos.Find(id);
+     if (producto == null)
+     {
+         return NotFound();
+     }
+     return View(producto);
+ }
+
+ [HttpPost]
+ public IActionResult Borrar(Producto producto)
+ {
+     _contexto.misProductos.Remove(producto);
+     _contexto.SaveChanges();
+     return RedirectToAction(nameof(Listar));
+ }
+
+```
+Tenemos que crear una vista con la plantilla vacia que se llame igual que `BorrarProducto` o el nombre que le hayas asignado.
+
+```csharp
+@model WebApplication9.Models.EditarProductoModelo
+
+<form asp-action="BorrarProducto">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="id" class="control-label">ID del producto</label>
+        <input asp-for="Id" class="form-control" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Borrar" class="btn btn-default" />
+    </div>
+</form>
+```
+
+Lo mismo que antes, modificamos `BorrarProducto` y luego el modelo `EditarProductoModelo` que solo tenia un id.
+
+Después, volvemos al controlador, clic derecho sobre el nombre del método `Borrar` y con plantilla, elegimos la de Borrar.
+
+![borrar](../../images/boirrar.PNG){: style="height:400px;width:600px"}
+
+Agregamos la URL del método, en este caso se llama: `BorrarProducto`
+
+![borrar](../../images/borrar.PNG)
+
+<center>  Ya tendríamos el CRUD hecho, hemos creado, listado, actualizado y borrado. </center>
+
+-------
+
+<center> ![bicho](../../images/bicho.jpg){: style="height:400px;width:400px"} </center>
+
+
+
+
+
+
 
 
 
