@@ -1,4 +1,16 @@
-site_name: My Docs
+site_name: z0kr0m's Blog
+site_description: an example blog set up following the tutorial
+site_url: http://www.example.com
+
+plugins:
+  - search
+  - blog:
+      blog_dir: Examen
+  - tags
+markdown_extensions:
+  - attr_list
+  - md_in_html
+
 theme:
   name: material
   lang: en
@@ -21,6 +33,7 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: cyan
       toggle: # with toggle we can change between light and dark theme
         icon: material/weather-sunny 
         name: Switch to dark mode
@@ -28,14 +41,12 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate   #default light mode, slate dark mode
-      primary: deep purple # primary color for headers, slidebar, text links (not hovered)...
+      primary: deep indigo # primary color for headers, slidebar, text links (not hovered)...
       accent: red # elements that can be interacted with: hovered links, buttons...
       toggle:
         icon: material/weather-night
         name: Switch to light mode
-#######################################################################################    
+#######################################################################################  
+ 
 
-extra:
-  social:
-    - icon: fontawesome/brands/github-alt
-      link: https://github.com/z0kr0m
+      
