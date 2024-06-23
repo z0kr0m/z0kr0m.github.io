@@ -93,6 +93,16 @@ Cada propiedad con public y su respectivo tipo de dato (Recuerda: Si en la base 
  public Categoria categoria { get; set; } = null!;
 ```
 <br>
+
+Si no tenemos la base de datos creada y tenemos que crearla mediante una migración, (más adelante), podemos agregarle al Id un auto_increment, que sería agregarle encima lo siguiente:
+
+
+```csharp
+[Key]
+[DatabaseGenerated(DatabaseGeneratedOption.Identity)]  // Auto increment
+public int Id { get; set; }
+```
+
 De esta manera crearíamos todos los modelos, cambiando tipos de datos y nombres, (No todos los modelos tienen foreign keys).
 
 ------
@@ -119,6 +129,9 @@ public class Contexto : DbContext
 No te olvides de agregar `: Dbconext` después del nombre de la clase.
 
 Los `DbSet<>` nos van a servir para mapear las tablas de la base de datos, por cada modelo que crees, tienes que agregar un `DbSet`, en este ejemplo tenemos solo dos, producto y catergoría, puedes fijarte [aquí](/Examen/2024/06/23/entity-framework/#crear-modelo-de-datos) 
+
+!!! note
+    En el caso de no tener las tablas ya creadas en la base de datos, haremos una `migración` más adelante, esta, nos va a crear las tablas con el nombre que le asignemos aquí al DbSet, en este caso, nos crearía dos tablas: `misProductos` y `misCategorias`
 
 ----
 
@@ -157,22 +170,77 @@ Dentro de la ternminal ejecutamos el siguiente comando:
 ```csharp
 Add-Migration "nombre"
 ```
+Nos va a aparecer una nueva ventana con un archivo nuevo (NO BORRAMOS NADA, LO DEJAMOS TAL CUAL).
 
+![migracion](../../images/migracion.png)
 
+ En el caso de que nos aparezca vacio, o casi vacio:
+
+!!! info
+    En la carpeta Migraciones borramos todas las migraciones y volvemos a crear una nueva (snapshot incluida).
+
+ El siguiente comando que vamos a ejecutar es:
+
+ ```csharp
+ Update-Database
+ ```
+ Este comando nos va a insertar las tablas en la base de datos que hayamos asignado en la [cadena de conexión](/Examen/2024/06/23/entity-framework/#cadena-de-conexion)
+
+Abrimos el administrador de Sql Server, (NO ES EL XAMPP!!).
+
+![sqlserver](../../images/sqlserver.png)
+
+ Iniciamos sesión con las credenciales que hemos asignado en la [cadena de conexión](/Examen/2024/06/23/entity-framework/#cadena-de-conexion) y comprobamos que nos ha creado la base de datos con las tablas que van a coincidir con el nombre que le asignamos a los modelos en el [DbSet](/Examen/2024/06/23/entity-framework/#crear-clase-dbcontext).
 
 -----
 
-
-
 ## CRUD con Entity Framework
+
+Teniendo ya la base de datos poblada con las tablas, es hora de crear `controladores`.
+
+Recordamos que cada controlador va a coger datos de los modelos y visualizarlo en la vista.
+
+### Crear un controlador
+
+Sobre la carpeta `Controllers` hacemos clic derecho -> Agregar -> Controlador
+
+![controlador](../../images/plantillaVacia.PNG)
+
+Vamos a elegir la plantilla vacia, así lo hacemos manual y usamos el teclado para que suene más.
+
+En cuanto al nombre la convención es NombreModeloController -> ProductoController, ClienteController, _etc, etc. ;\)_
+
+
+```csharp
+public class ProductoController : Controller
+{
+    private readonly Contexto _contexto;
+
+    public ProductoController(Contexto conexto)
+    {
+        _contexto = conexto;
+    }
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+```
+Acuérdate que tienes que modificar el nombre `Producto` por el modelo que estés usando.
+Aquí estamos creando un constructor para que instancie el contexto que nos va a servir para hacer peticiones a la base de datos.
+
+### Crear métodos controlador
+
+En esta sección vamos a crear todos los métodos para hacer un CRUD (Create, Read, Update, Delete).
+
+
+
+
+
+
 
 ----- 
 
-```csharp
-[Key]
-[DatabaseGenerated(DatabaseGeneratedOption.Identity)]  // Auto increment
-public int Id { get; set; }
-```
 
 
 
