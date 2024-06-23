@@ -1,0 +1,41 @@
+site_name: My Docs
+theme:
+  name: material
+  lang: en
+  features:
+    - header.autohide
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+
+######################################################################################    
+  # Palette  > https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/
+  palette: 
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle: # with toggle we can change between light and dark theme
+        icon: material/weather-sunny 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate   #default light mode, slate dark mode
+      primary: deep purple # primary color for headers, slidebar, text links (not hovered)...
+      accent: red # elements that can be interacted with: hovered links, buttons...
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+#######################################################################################    
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/z0kr0m
