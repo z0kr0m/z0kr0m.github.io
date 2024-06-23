@@ -50,61 +50,27 @@ Ten cuidado al copiar la cadena, no te olvides de la coma después del AllowedHo
 
 ## Crear modelo de datos
 
+El siguiente paso es crear los modelos, recordamos que un modelo es una representación de una tabla.
+<br>
 
+ ![modelo](../../images/modelo.PNG) 
 
+Creamos una clase por tabla en la carpeta Models
 
+###  Ejemplo modelo
 
+```csharp
+ public class Producto
+ {
+     public int Id { get; set; }
+     public string? Nombre { get; set; }
 
+     [Column(TypeName = "decimal(4, 2)")]
+     public decimal Precio { get; set; }
+     public int CategoriaId { get; set; }
+     [ForeignKey(nameof(CategoriaId))]
+     public Categoria categoria { get; set; } = null!;
 
- 
-	
- 
-En Models
- 
- 
-todos los modelos
- 
-despues
- 
-Crear clase  inherited DbContext
- 
- 
-    public Contexto(DbContextOptions<Contexto> options) : base(options)
-    {
-    }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-    }
- 
-    public DbSet<Producto> misProductos { get; set; } // Nombre de la tabla
-}
- 
- 
- 
-programcs
- 
-builder.Services.AddDbContext<Contexto>(
-options =>
-{
- 
-options.UseSqlServer(builder.Configuration.GetConnectionString("MiConexion"));
-});
- 
- 
-Add-Migration "aa"
- 
-Update-Database
- 
- 
- 
-controller model  with EntityTemplate
- 
- 
-private readonly TiendaDbContext _context;
-public Productos(TiendaDbContext _context )
-{
-           this._context = _context;
-}  
+ }
+```
 
-
-## Prueba
