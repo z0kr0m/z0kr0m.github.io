@@ -229,9 +229,73 @@ public class ProductoController : Controller
 Acuérdate que tienes que modificar el nombre `Producto` por el modelo que estés usando.
 Aquí estamos creando un constructor para que instancie el contexto que nos va a servir para hacer peticiones a la base de datos.
 
-### Crear métodos controlador
+## Crear métodos controlador
 
 En esta sección vamos a crear todos los métodos para hacer un CRUD (Create, Read, Update, Delete).
+
+### Crear o Insertar
+
+Primero de todo, creamos un método que returne una vista que va a ser un formulario donde el usuario va a rellenar los campos y en base a esos datos, vamos a hacer un insert en la base de datos.
+
+```csharp
+ public IActionResult vistaCrear()
+ { 
+     return View();
+ }
+```
+
+Ahora hacemos clic derecho encima de `vistaCrear` y le damos a agregar vista. Cogemos la que tiene plantilla.
+
+![plantillaRazor](../../images/plantillarazor.PNG)
+
+EL NOMBRE NO LO CAMBIAMOS, elegimos la plantilla crear, el modelo correspondiente y el DbContext.
+
+Nos va a aparecer un formulario en HTML con todos los campos del modelo.
+
+![formulario](../../images/formulario.png)
+
+Lo único que tenemos que agregar / modificar es `method="post"`, `asp-controller="NombreControlador"`, `asp-action="NombreMetodo"`
+El controlador es el mismo desde donde hemos hecho el clic derecho para agregar la vista, el método es el encargado de manejar los datos que el cliente va a rellenar en el formulario. Asignamos el nombre que queramos al action y volvemos al controlador donde vamos a crearlo.
+
+
+```csharp
+
+ /* public IActionResult vistaCrear()
+ { 
+     return View();
+ }*/
+
+[HttpPost]
+public IActionResult Crear(Producto producto)
+{
+        _contexto.misProductos.Add(producto);
+        _contexto.SaveChanges();
+        return RedirectToAction(nameof(Index));
+}
+```
+Añadimos antes del método `[HttpPost]` que es el método que usamos para enviar formularios.
+Entre paréntesis va a ir el Modelo que hemos elegido antes al crear la vista del formulario.
+
+En cuanto a `_contexto` es el nombre que le hemos asignado arriba al crear el controlador [aquí](/Examen/2024/06/23/entity-framework/#crear-un-controlador) 
+`misProductos` hace referencia al DbSet que hemos creado tambíen [arriba](/Examen/2024/06/23/entity-framework/#crear-clase-dbcontext), en este caso es productos, porque estamos usando el modelo productos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
