@@ -69,5 +69,101 @@ Por último, agregamos un método que returne la conexión, (vamos a usarlo más
  }
 ```
 
+<figure markdown="span">
 ![conexion](../../images/ClaseConexion.png)
+
+ <figcaption>Un vistazo de cómo quedaría la clase conexión</figcaption>
+</figure>
+
+------
+
+
+## Clases Modelo
+
+Vamos a por las clases del modelo, (son las 3 tablas que has creado en tu base de datos).
+
+!!!note
+    Siempre empezamos por las que no tienen ninguna foreign key, en este caso es `Profesor`
+
+    ```csharp
+        public class Profesor
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+    }
+    
+    ```
+
+A continuación, seguiremos por la que tenga la foreign key de `Profesor`, en este caso, `Curso`
+
+```csharp
+ public class Curso
+ {
+     public int Id { get; set; }
+     public string nombre_c { get; set; }
+     public int nombre_d { get; set; }
+     public int id_profesor { get; set; }
+     [ForeignKey(nameof(id_profesor))]
+     public Profesor profesor { get; set; }
+
+ }
+```
+
+Recordamos que los `Id` si se llaman `Id`, `NombreId` no hace falta poner `[key]` encima suya.
+
+### Foreign keys
+
+Para declarar una [foreign key](/Definiciones/#foreign-key) lo primero que tenemos que hacer es crear un campo que sea del tipo al que va a referenciar, en este caso es un id, por lo tanto tipo `int`.
+
+```csharp
+  public int id_profesor { get; set; }
+```
+
+Ahora tenemos que declarar un objeto del tipo de la tabla de la que queremos crear una relación.
+
+```csharp
+  public Profesor profesor { get; set; }
+```
+
+Por úiltimo, especificamos el campo de foreign key (tiene que ser encima del objeto).
+
+```csharp
+  [ForeignKey(nameof(id_profesor))]
+  public Profesor profesor { get; set; }
+```
+Si te das cuenta al hacer el `nameof()` estamos especificando el `int` que hemos creado arriba, estamos básicamente diciendo: Quiero formar una relación con la tabla `Profesor` por eso creo un objeto, y dentro de `Profesor` quiero hacer referencia a su clave primaria (id) porque se identifica unívocamente.
+
+![profesor](../../images/SIN_ENTITY/cursoModelo.PNG)
+
+<div> </div>
+
+Por último, la clase `Alumno`
+
+```csharp
+  public class Alumno
+  {
+      public int Id { get; set; }
+      public string Nombre { get; set; }
+
+      public string apellido1 { get; set; }
+
+      public string apellido2 { get; set; }
+
+      public string dni {  get; set; } 
+
+      public string direccion {  get; set; }
+
+      public DateOnly fecha_n {  get; set; }
+
+      public string telefono { get; set; }
+
+  }
+
+```
+
+-----
+
+
+## Controladores
+
 
