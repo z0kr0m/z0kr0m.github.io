@@ -405,10 +405,298 @@ De todas maneras, [aquí](/Examen/2024/06/23/entity-framework/#agregar-enlaces-a
 
 ### Insertar
 
+Vamos a por el método insertar, creamos un nuevo método en nuestro controlador. Recuerda intentar crear un controlador por cada modelo y si nos pide: listame todos los profesores pues dentro del controlador profesores, haremos los métodos reutulizando el código que te pongo aquí cambiando los atributos.
+
+```csharp
+public IActionResult agregarAlumno()
+{
+    return View();
+}
+
+[HttpPost]
+public IActionResult agregarAlumnoDB(Alumno alumno_formulario)
+{
+    var nombre = alumno_formulario.Nombre;
+    var apellido1 = alumno_formulario.apellido1;
+    var apellido2 = alumno_formulario.apellido2;
+    var telefono = alumno_formulario.telefono;
+    var dni = alumno_formulario.dni;
+    var direccion = alumno_formulario.direccion;
+    var fecha_n = alumno_formulario.fecha_n;
+    var id_curso = alumno_formulario.id_curso;
+
+
+    string query = "INSERT INTO ALUMNO (nombre, apellido1, apellido2, telefono, dni, direccion, fecha_n, id_curso) VALUES (@nombre, @apellido1, @apellido2, @telefono, @dni, @direccion, @fecha_n, @id_curso)";
+
+    SqlCommand cmd = new SqlCommand(query, conexion.returnarConexion());
+    cmd.Parameters.AddWithValue("@nombre", nombre);
+    cmd.Parameters.AddWithValue("@apellido1", apellido1);
+    cmd.Parameters.AddWithValue("@apellido2", apellido2);
+    cmd.Parameters.AddWithValue("@telefono", telefono);
+    cmd.Parameters.AddWithValue("@dni", dni);
+    cmd.Parameters.AddWithValue("@direccion", direccion);
+    cmd.Parameters.AddWithValue("@fecha_n", fecha_n);
+    cmd.Parameters.AddWithValue("@id_curso", id_curso);
+
+    cmd.ExecuteNonQuery();
+
+    return RedirectToRoute(new { controller = "Home", action = "Index" });
+}
+
+<div> </div>
+
+```
+Primero creamos la vista, 
+lo mismo, clic derecho, agregar vista con plantilla, NO CAMBIAMOS el nombre, elegimos la plantilla crear y elegimos el modelo, si vamos a insertar alumnos, elegimos alumnos, si vamos a insertar profesores, profesores.
+<div> </div>
+![crearAlumnoplantillaVista](../../images/SIN_ENTITY/crearAlumno.PNG)
+
+Solo hay que agregar el método post, agrgar el controlador y el método en action (aquí ponemos el del HTTPOST).
+Después los campos del ID los dejamon en `hidden`, para que no se vean. Ya que en nuestra base de datos tenemos el ID en `auto increment`
+<div> </div>
+![formu](../../images/SIN_ENTITY/form.png)
+
+En cuanto a la explicación del primer código no voy a hacer mucho hincapié, simplemente tienes que agregar los campos del modelo
+
+```csharp
+[HttpPost]
+public IActionResult agregarAlumnoDB(Alumno alumno_formulario)
+{
+    var nombre = alumno_formulario.Nombre;
+    var apellido1 = alumno_formulario.apellido1;
+    var apellido2 = alumno_formulario.apellido2;
+    var telefono = alumno_formulario.telefono;
+    var dni = alumno_formulario.dni;
+    var direccion = alumno_formulario.direccion;
+    var fecha_n = alumno_formulario.fecha_n;
+    var id_curso = alumno_formulario.id_curso;
+}
+```
+Entre paréntesis ponemos el modelo que querramos insertar, en este caso alumno.
+con el var asignamos el valor de cada atributo.
+
+Esto lo hacemos para la query del INSERT, cada variable va a ir en el `VALUES` con un `@`
+
+Por eso en el `cmd` tenemos que agregar parámetros. Hacemos esto porque no sabemos qué va a insertar el usuario, entonces tenemos que vincular los valores del formulario a una variable.
+
+!!! note
+    No te olvides de cambiar los valores no siempree va a ser en base al alumno
+
+En cuanto al `return` déjalo como está, lo que hace es basicamente redirigirnos a la página principal cuando inserte los datos.
+
+Ejecuta el programa y comprueba si te inserta. (No te olvides de agregar el primer método al index con un link).
+
+
+### Actualizar
+
+Vamos a actualizar, este es el código, un poco extenso.
+
+```csharp
+     public IActionResult pedirIDAlumno()
+    {
+        return View();
+    }
+
+    
+
+    [HttpPost]
+    public IActionResult actualizarAlumno(Alumno alumnoFormulario)
+    {
+        Alumno alumnoEditar = new Alumno();
+        alumnoEditar.Id = alumnoFormulario.Id;
+
+        string query = $"SELECT nombre, apellido1, apellido2, dni, direccion, fecha_n, telefono, id_curso FROM Alumno where id_alumno = @id";
+
+        SqlCommand cmd = new SqlCommand(query, conexion.returnarConexion());
+        cmd.Parameters.AddWithValue("@id", alumnoFormulario.Id);
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            alumnoEditar.Nombre = reader.GetString(0);
+            alumnoEditar.apellido1 = reader.GetString(1);
+            alumnoEditar.apellido2 = reader.GetString(2);
+            alumnoEditar.dni = reader.GetString(3);
+            alumnoEditar.direccion = reader.GetString(4);
+            alumnoEditar.fecha_n = reader.GetString(5);
+            alumnoEditar.telefono = reader.GetInt32(6);
+            alumnoEditar.id_curso = reader.GetInt32(7);
+        }
+
+        return View(alumnoEditar);
+    }
+
+ 
+    [HttpPost]
+    public IActionResult actualizarAlumnoDB(Alumno alumnoDB)
+    {
+        string query = "UPDATE Alumno SET nombre = @nombre, apellido1 = @apellido1, apellido2 = @apellido2, dni = @dni, direccion = @direccion, fecha_n = @fecha_n, telefono = @telefono, id_curso = @id_curso WHERE id_alumno = @id;";
+        SqlCommand cmd = new SqlCommand(query, conexion.returnarConexion());
+
+        cmd.Parameters.AddWithValue("@id", alumnoDB.Id);
+        cmd.Parameters.AddWithValue("@nombre", alumnoDB.Nombre);
+        cmd.Parameters.AddWithValue("@apellido1", alumnoDB.apellido1);
+        cmd.Parameters.AddWithValue("@apellido2", alumnoDB.apellido2);
+        cmd.Parameters.AddWithValue("@dni", alumnoDB.dni);
+        cmd.Parameters.AddWithValue("@direccion", alumnoDB.direccion);
+        cmd.Parameters.AddWithValue("@fecha_n", alumnoDB.fecha_n);
+        cmd.Parameters.AddWithValue("@telefono", alumnoDB.telefono);
+        cmd.Parameters.AddWithValue("@id_curso", alumnoDB.id_curso);
+
+        cmd.ExecuteNonQuery();
+
+        return RedirectToRoute(new { controller = "Home", action = "Index" });
+    }
+```
+
+
+#### Primera vista
+Clic derecho, agregar vista, esta vez, vacia.
+
+```csharp
+@model MiPractica.Models.Alumno
 
 
 
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="Alumno" asp-action="actualizarAlumno">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+```
+
+!!! warning
+    Tienes que cambiar la primera linea
+
+      ```csharp
+      @model MiPractica.Models.Alumno
+
+      ```
+
+Reemplazas `MiPractica` por el nombre de tu proyecto en c# y Alumno por el modelo que estés actualizando.
+
+Segunda vista, la de `actualizarAlumno`
+
+```csharp
+@model MiPractica.Models.Alumno
+
+@{
+    ViewData["Title"] = "Actualizar Alumno";
+}
+
+<h1>Actualizar Alumno</h1>
+
+<h4>Alumno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="Alumno" asp-action="actualizarAlumnoDB">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input hidden asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apellido1" class="control-label"></label>
+                <input asp-for="apellido1" class="form-control" />
+                <span asp-validation-for="apellido1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="apellido2" class="control-label"></label>
+                <input asp-for="apellido2" class="form-control" />
+                <span asp-validation-for="apellido2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dni" class="control-label"></label>
+                <input asp-for="dni" class="form-control" />
+                <span asp-validation-for="dni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccion" class="control-label"></label>
+                <input asp-for="direccion" class="form-control" />
+                <span asp-validation-for="direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fecha_n" class="control-label"></label>
+                <input asp-for="fecha_n" class="form-control" />
+                <span asp-validation-for="fecha_n" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefono" class="control-label"></label>
+                <input asp-for="telefono" class="form-control" />
+                <span asp-validation-for="telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="id_curso" class="control-label"></label>
+                <input asp-for="id_curso" class="form-control" type="number" />
+                <span asp-validation-for="id_curso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+```
+
+Con esto ya nos funcionaría, ten cuidado con el `@model MiPractica.Models.Alumno`
+
+![sofiafir](../../images/SIN_ENTITY/sofia.PNG)
+
+Si te molesta lo rojo puedes eliminar la linea: ` <span asp-validation-for` del formulario de la vista.
 
 
+## Borrado
+
+No me da tiempo a terminar lo de borrar, es practicamente igual que el de actualizar, primero pides el id, y luego que se ejecture el borrado intenta hacerlo mirando el de actualizar.
 
 
+```csharp
+[HttpPost]
+public IActionResult borrarAlumno(Alumno alumno)
+{
+    string query = "DELETE FROM Alumno WHERE Id = @Id";
+
+    using (SqlConnection connection = conexion.returnarConexion())
+    {
+        SqlCommand cmd = new SqlCommand(query, connection);
+        cmd.Parameters.AddWithValue("@Id", alumno.Id);
+
+        cmd.ExecuteNonQuery();
+    }
+
+    return RedirectToRoute(new { controller = "Home", action = "Index" });
+}
+```
+
+
+------
+
+Me hubiera gustado hacerlo más en detalle, pero no me ha dado tiempo.
+
+SUERTE!!
+
+![bicho2](../../images/bicho3.jpg)
