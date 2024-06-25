@@ -291,7 +291,7 @@ Entre paréntesis va a ir el Modelo que hemos elegido antes al crear la vista de
 En cuanto a `_contexto` es el nombre que le hemos asignado arriba al crear el controlador [aquí](/Examen/2024/06/23/entity-framework/#crear-un-controlador) 
 `misProductos` hace referencia al DbSet que hemos creado tambíen [arriba](/Examen/2024/06/23/entity-framework/#crear-clase-dbcontext), en este caso es productos, porque estamos usando el modelo productos.
 
-
+#### Agregar enlaces al Index
 Para probarlo, podríamos directamente ejecutar el programa (triangulo verde con fondo oscuro), y modificar la url
 
 ![urla](../../images/url.png)
