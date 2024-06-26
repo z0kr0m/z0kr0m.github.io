@@ -4,6 +4,7 @@ site_url: http://www.example.com
 
 plugins:
   - search
+  - mkdocs-video
   - blog:
       blog_dir: Examen
   - tags
