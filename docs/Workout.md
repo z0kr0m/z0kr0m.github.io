@@ -1,6 +1,6 @@
 # Workout
 
-## Monday Back & Biceps & Forearms
+## Monday | Thursday >  Back & Biceps & Forearms
 
 
 
@@ -47,6 +47,10 @@ Is a muscle in the upper arm that flexes the elbow. It lies beneath the biceps b
 - ![type:video](./videos/gym.mp4)
 
 
+- standing wrist curls
+ ![standingback](https://www.lyfta.app/_next/image?url=%2Fthumbnails%2F01041201.jpg&w=3840&q=20)
+
+
 -------
 
 
@@ -79,4 +83,30 @@ Is a muscle in the upper arm that flexes the elbow. It lies beneath the biceps b
 ### Erector Spinae 
 
 
-## Tuesday
+## Tuesday | Friday > Chest & Shoulders & Triceps
+
+### WARM UP
+
+[WARM UP VIDEO](https://www.youtube.com/watch?v=fSAw0_tsZ6U)
+
+
+### Pectoralis Major
+
+**Low cable crossover**
+
+![crossover](https://fitnessprogramer.com/wp-content/uploads/2021/02/Low-Cable-Crossover.gif)
+
+**Deep push up**
+
+![DEEP PUSH UP](https://cdn.shopify.com/s/files/1/1633/7705/files/dumbbell_pec_exercises_480x480.jpg?v=1626091720)
+
+### Serratus Anterior
+
+- [Serratus workout](https://www.youtube.com/watch?v=URhP3tUogDw)
+
+**Pull over**
+
+![Pullover](https://cdn.shopify.com/s/files/1/1876/4703/files/Dumbbell_Pullover_-_shutterstock_426449815_1024x1024.jpg?v=1686407686)
+
+
+
