@@ -58,6 +58,19 @@ Is a muscle in the upper arm that flexes the elbow. It lies beneath the biceps b
 
 ### Latissimus Dorsi (Lats)
 
+
+
+### Trapezius (Traps)
+
+![trapezius](https://www.220triathlon.com/wp-content/uploads/sites/4/2021/05/Trapezius-stretches-d9d0383.jpg){: style="height:400px;width:600px"}
+
+### Erector Spinae 
+It is a group of muscles that run along the length of the spine. It allows the body to move from flexed or bent position to an upright extended one. Additionally, the erector spinae assists in the rotation of the spine and good posture.
+![erector_spinaee](https://cdn-degmb.nitrocdn.com/ttfRdoaCkYdYriFDAQYzsXWjIyYFFwdP/assets/images/optimized/rev-f2e8523/3dmusclelab.com/wp-content/uploads/2020/01/Erector-spinae-muscles.png){: style="height:400px;width:600px"}
+
+### Rhomboids
+
+### Exercises Back
  **Barbell row (pronated grip)**
 
  ![barbell](https://qph.cf2.quoracdn.net/main-qimg-c04d13c60171b21a2226350b0dde526e-lq)
@@ -66,21 +79,23 @@ Is a muscle in the upper arm that flexes the elbow. It lies beneath the biceps b
 
 ![chest](https://fitliferegime.com/wp-content/uploads/2022/11/Neutral-Grip-Dumbbell-Chest-Supported-Row.webp)
 
-### Trapezius (Traps)
 
 **Dumbell Shrugs (sitted and standing)  you can roll your shoulders**
-![shrugs](https://de.braingain.fit/cdn/shop/articles/dumbbell-shrug-steps-1536x1153.png?v=1701426951)
-![shrugs](https://fitliferegime.com/wp-content/uploads/2022/04/Incline-Dumbbell-Shrug.webp)
-![shrugs](https://www.mybodycreator.com/content/files/2023/05/28/446_M.png)
+![shrugs](https://de.braingain.fit/cdn/shop/articles/dumbbell-shrug-steps-1536x1153.png?v=1701426951){: style="height:400px;width:600px"}
 
-
+**Bent-over dumbbell**
+![row](https://weighttraining.guide/wp-content/uploads/2016/10/bent-over-one-arm-dumbbell-row-resized.png){: style="height:400px;width:600px"}
 
 **Dumbbell incline row**
-![incline row](https://fitnessvolt.com/wp-content/uploads/2020/12/dumbbell-incline-row-back-exercise.jpg)
+![incline row](https://fitnessvolt.com/wp-content/uploads/2020/12/dumbbell-incline-row-back-exercise.jpg){: style="height:400px;width:600px"}
 
-### Rhomboids
 
-### Erector Spinae 
+
+![cable](https://weighttraining.guide/wp-content/uploads/2017/03/Cable-Upright-Row-resized.png){: style="height:400px;width:600px"}
+
+
+
+[Video](https://www.youtube.com/watch?app=desktop&v=Il49512O9Ww)
 
 
 ## Tuesday | Friday > Chest & Shoulders & Triceps
