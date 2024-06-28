@@ -235,3 +235,68 @@ The main function of triceps brachii is extension of the forearm at the elbow jo
 **Triceps dips**
 
 ![tricepsdips](https://qph.cf2.quoracdn.net/main-qimg-cf2058c891a58de973cc146af500a09e-lq){: style="height:400px;width:600px"}
+
+
+## Wednesday | Friday > Legs
+
+### Quadriceps Quads
+
+### Hamstring
+
+### Calves
+
+### Glutes
+
+### Exercises leg
+
+**Bodyweight drop jump**
+
+![bodyweight drop jump](https://gymvisual.com/img/p/1/4/1/1/2/14112.gif){: style="height:400px;width:600px"}
+
+**counterbalance skater squat**
+
+![countersquat](https://gymvisual.com/img/p/1/8/6/1/0/18610.gif){: style="height:400px;width:600px"}
+
+**Squat 2 sec hold**
+
+![squat](https://weighttraining.guide/wp-content/uploads/2016/10/barbell-squat-resized-FIXED-2.png){: style="height:400px;width:600px"}
+
+**Goblet squat**
+
+![goblet](https://anabolicaliens.com/cdn/shop/articles/5fbc1c1889a1d8fc84f5808b_dumbbell-goblet-squat.png?v=1641750308){: style="height:400px;width:600px"}
+
+**Bulgarian squat**
+
+![bulgarian](https://preview.redd.it/request-how-much-weight-is-needed-in-a-bulgarian-split-v0-4urdfh9pqg8c1.jpg?width=640&crop=smart&auto=webp&s=7cbdb4ee810c33ad61ec39f5050565ddf20c30d3){: style="height:400px;width:600px"}
+
+**Dumbbell stiff leg deadlift**
+
+![stiff](https://gymvisual.com/13630-thickbox_default/dumbbell-stiff-leg-deadlift.jpg){: style="height:400px;width:600px"}
+
+**Sliding Leg Curl on Floor**
+
+![slide](https://miro.medium.com/v2/resize:fit:679/1*FJcwoah43EUFNCoCm-BrKw.gif){: style="height:400px;width:600px"}
+
+**Dumbell RDL**
+
+![onme](https://apilyfta.com/static/GymvisualPNG/14451101-Dumbbell-RDL-Stretch_Isometric_small.png){: style="height:400px;width:600px"}
+
+**Squat hold calve**
+
+![hold](https://gymvisual.com/img/p/2/1/7/6/8/21768.gif){: style="height:400px;width:600px"}
+
+**Calves raises**
+
+![calvesraises](https://cdn.prod.website-files.com/6572dde39e1e8b4b2bf5224d/65e630972fd563ce43a44eca_dumbbell-standing-calf-raise-.jpg){: style="height:400px;width:600px"}
+
+**Glute bridge**
+
+![glutebridge](https://www.lyfta.app/_next/image?url=%2Fthumbnails%2F34271201.jpg&w=3840&q=20){: style="height:400px;width:600px"}
+
+**Kickbacks**
+
+![kick](https://fitnessprogramer.com/wp-content/uploads/2022/02/Banded-Glute-Kickbacks.gif){: style="height:400px;width:600px"}
+
+**Lying side leg lift**
+
+![lift](https://static.vecteezy.com/system/resources/previews/016/126/548/non_2x/woman-doing-lying-side-leg-lifts-or-lateral-raises-hip-abductors-or-adductors-leg-raise-exercise-in-2-step-flat-illustration-isolated-on-white-background-vector.jpg){: style="height:400px;width:600px"}
